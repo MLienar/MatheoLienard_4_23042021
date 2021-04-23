@@ -279,6 +279,12 @@ input[data-error]::after {
   transition: 0.3s;
   opacity: 0;
 }
+
+.checkbox-input:disabled .checkbox-icon::after,
+.checkbox2-linput:disabled .checkbox-icon::after {
+  border: 2px solid gray;
+}
+
 .checkbox-input {
   display: none;
 }
@@ -335,7 +341,7 @@ input[data-error]::after {
 .btn-signup {
   background: #fe142f;
   display: block;
-  margin: 0 auto;
+  margin: 3vh auto;
   border-radius: 7px;
   font-size: 1rem;
   padding: 12px 82px;
@@ -444,8 +450,9 @@ input[data-error]::after {
   min-width: 424px;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: flex-start;
+  max-height: 100%;
 }
 .hero-content::after {
   content: "";
@@ -468,9 +475,9 @@ input[data-error]::after {
 .hero-text {
   width: 146%;
   font-weight: normal;
-  margin-top: 57px;
   padding: 0;
   font-size: clamp(16px, 1rem + 0.5vw, 25px);
+  margin: 10vh 0;
 }
 .btn-signup {
   outline: none;
@@ -478,7 +485,6 @@ input[data-error]::after {
   font-size: 1.3rem;
   padding: 15px 23px;
   margin: 0;
-  margin-top: 59px;
 }
 .hero-img {
   grid-column: span 8;
@@ -529,10 +535,12 @@ footer {
   .hero-headline {
     font-size: clamp(30px, 2rem + 4vw, 60px);
     white-space: normal;
+    line-height: 10vh;
   }
   .hero-text {
     width: unset;
     font-size: clamp(15px, 1rem + 1vw, 25px);
+    margin: 5vh 0;
   }
 
   .hero-img {
