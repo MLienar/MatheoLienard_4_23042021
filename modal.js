@@ -1,57 +1,59 @@
+// DOM Elements
+const modalbg = document.querySelector('.bground')
+const modalBtn = document.querySelectorAll('.modal-btn')
+const formData = document.querySelectorAll('.formData')
+const closeBtn = document.querySelector('.close')
+const form = document.querySelector('form')
+const nameInput = document.getElementById('last')
+const firstNameInput = document.getElementById('first')
+const emailInput = document.getElementById('email')
+const birthdate = document.getElementById('birthdate')
+const quantity = document.getElementById('quantity')
+const citiesSelects = document.getElementsByName('location')
+const mandatoryCheckBox = document.getElementById('checkbox1')
+const submitBtn = document.querySelector('.btn-submit')
+const successMessage = document.querySelector('.succes-message')
+let formIsValid = false
+
+
 function editNav() {
-  var x = document.getElementById('myTopnav');
+  var x = document.getElementById('myTopnav')
   if (x.className === 'topnav') {
-    x.className += ' responsive';
+    x.className += ' responsive'
   } else {
-    x.className = 'topnav';
+    x.className = 'topnav'
   }
 }
-
-// DOM Elements
-const modalbg = document.querySelector('.bground');
-const modalBtn = document.querySelectorAll('.modal-btn');
-const formData = document.querySelectorAll('.formData');
-const closeBtn = document.querySelector('.close');
-const form = document.querySelector('form');
-const nameInput = document.getElementById('last');
-const firstNameInput = document.getElementById('first');
-const emailInput = document.getElementById('email');
-const birthdate = document.getElementById('birthdate');
-const quantity = document.getElementById('quantity');
-const citiesSelects = document.getElementsByName('location');
-const mandatoryCheckBox = document.getElementById('checkbox1');
-const submitBtn = document.querySelector('.btn-submit')
-let formIsValid = true;
 
 // Add warning when input is wrong
 function addWarning(e, message) {
   if (!e.target.parentNode.querySelector('.warning-text')) {
   const warning = e.target.parentNode.appendChild(document.createElement('p'))
-  warning.textContent = message;
+  warning.textContent = message
   warning.classList.add("warning-text")
   } else {
-    return;
+    return
   }
 }
 
 // Remove warning when input is right
 function removeWarning(e) {
   if(e.target.parentNode.querySelector('.warning-text')) {
-    e.target.parentNode.querySelector('.warning-text').remove();
+    e.target.parentNode.querySelector('.warning-text').remove()
   }
 }
 
 // Validate Names
 function validateName(e) {
   if(e.target.value.length < 2) {
-    formIsValid = false;
-    toggleButton();
-    const warningMessage = "Merci d'entrer 2 caractères ou plus";
-    addWarning(e, warningMessage);
+    formIsValid = false
+    toggleButton()
+    const warningMessage = "Merci d'entrer 2 caractères ou plus"
+    addWarning(e, warningMessage)
   } else {
-    removeWarning(e);
-    formIsValid = true;
-    toggleButton();
+    removeWarning(e)
+    formIsValid = true
+    toggleButton()
   }
 }
 
@@ -62,52 +64,62 @@ nameInput.addEventListener("change", validateName)
 // Validate Email
 function validateMail(e) {
   const userEmail = e.target.value
-  console.log(userEmail);
-  const regExp = new RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
+  console.log(userEmail)
+  const regExp = new RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
   if(regExp.test(userEmail)) {
-    formIsValid = true;
-    toggleButton();
-    removeWarning(e);
-  } else {
-    formIsValid = false;
+    formIsValid = true
     toggleButton()
-    const errorMessage = 'Veuillez entrer une adresse mail valide';
+    removeWarning(e)
+  } else {
+    formIsValid = false
+    toggleButton()
+    const errorMessage = 'Veuillez entrer une adresse mail valide'
     addWarning(e, errorMessage)
   }
 }
 
 // Email validation event
 emailInput.addEventListener("change", validateMail)
+let cityInputQuantity = 0
+
+// Validate Date
+function validateBirthdate(e) {
+  const birthdate = e.target.value
+  if(!birthdate) {
+    const warning = 'Veuillez entrer votre date de naissance'
+    addWarning(e, warning)
+    formIsValid = false
+    toggleButton()
+  } else {
+    removeWarning(e)
+    formIsValid = true
+    toggleButton()
+  }
+}
+
+// Date validation event
+birthdate.addEventListener("change", validateBirthdate)
+
 
 // Validate Quantity
 function validateQuantity(e) {
-  const inputQuantity = parseInt(e.target.value);
-  if (isNaN(inputQuantity)) {
+  cityInputQuantity = parseInt(e.target.value)
+  if (isNaN(cityInputQuantity)) {
     removeWarning(e)
-    const errorMessage = 'Veuillez entrer un nombre';
-    addWarning(e, errorMessage);
-    formIsValid = false;
-  } else if (inputQuantity > 20) {
+    const errorMessage = 'Veuillez entrer un nombre'
+    addWarning(e, errorMessage)
+    formIsValid = false
+    toggleButton()
+  } else if (cityInputQuantity > 20) {
     removeWarning(e)
-    const errorMessage = 'Menteur';
-    addWarning(e, errorMessage);   
-    formIsValid = false;
-    toggleButton(); 
+    const errorMessage = 'Menteur'
+    addWarning(e, errorMessage)   
+    formIsValid = false
+    toggleButton() 
   } else {
-    removeWarning(e);
-    formIsValid = true;
-    // Check input quantity against number of cities checked
-    if(inputQuantity > 0) {
-      for (const city of citiesSelects) {
-        city.disabled = false;
-      }
-      validateCities(e)
-    } else {
-      // Desactive la sélection de villes si l'utilisateur déclare 0 tournois
-      for (const city of citiesSelects) {
-        city.disabled = true;
-      }
-    }
+    removeWarning(e)
+    formIsValid = true
+    toggleButton()
   }
 }
 
@@ -116,44 +128,80 @@ quantity.addEventListener("change", validateQuantity)
 
 // Cities select validation
 function validateCities(e) {
-  let citySelected = false;
-  for (const city of citiesSelects) {
-    if(!city.checked && !citySelected) {
-      citySelected = false;
-    } else {
-      citySelected = true;
+  let citiesChecked = 0
+  for(const city of citiesSelects) {
+    if(city.checked) {
+      citiesChecked ++
     }
-  } if (citySelected) {
+  }
+  // Cas où l'utilisateur déclare aucun autre événement
+  if (cityInputQuantity < 1) {
+    if (citiesChecked < 1) {
       removeWarning(e)
-      formIsValid = true; 
-      toggleButton();
+      formIsValid = true
+      toggleButton()
+    } else {
+      // Incohérence entre les entrées numériques et selects
+      const warning = "Vous n'avez participé à aucun événement"
+      addWarning(e, warning)
+      formIsValid = false
+      toggleButton()
+    }
+    // Cas où l'utilisateur déclare un événement ou plus
   } else {
-    formIsValid = false;
-    const warningMessage = 'Veuillez sélectionner au moins une ville'
-    addWarning(e, warningMessage)
-    toggleButton()
+    // Incohérence entre les entrées numériques et selects
+    if (citiesChecked < 1) {
+      const warning = "Veuillez sélectionner au moins une ville"
+      addWarning(e, warning)
+      formIsValid = false
+      toggleButton()
+    } else {
+      removeWarning(e)
+      formIsValid = true
+      toggleButton()
+    }
   }
 }
 
 // Cities select event listener
-citiesSelects.forEach((input) => input.addEventListener("change", validateCities));
+citiesSelects.forEach((input) => input.addEventListener("change", validateCities))
 
 // Validate mandatory
 function validateMandatory(e) {
   if(e.target.checked) {
-    formIsValid = true;
-    toggleButton();
+    formIsValid = true
+    toggleButton()
+    removeWarning(e)
   } else {
-    formIsValid = false;
-    toggleButton();
-    const warningMessage = "Vous devez accepter les conditions d'utilisation"
-    addWarning(e, warningMessage)
+    const errorMessage = "Vous devez accepter les conditions d'utilisation"
+    addWarning(e, errorMessage)
+    formIsValid = false
+    toggleButton()
   }
+
 }
 
-
 // Mandatory checkbox event listener
-mandatoryCheckBox.addEventListener("change", validateMandatory)
+mandatoryCheckBox.addEventListener("click", validateMandatory)
+
+// Check if form inputs have values
+function checkIfInputs(e) {
+  // Check first 5 inputs
+  for (let i = 0; i < 5; i ++) {
+    if (e.target[i].value.length < 1) {
+      formIsValid = false;
+      toggleButton();
+      const warning = "Merci de remplir tous les champs"
+      addWarning(e, warning)
+      return
+    }
+  }
+  if (mandatoryCheckBox.checked && formIsValid) {
+    removeWarning(e)
+    setInterval(()=>{successMessage.style.display = 'flex'}, 1000)
+    
+  }
+}
 
 // Disable submit button if inputs invalid
 function toggleButton() {
@@ -169,25 +217,27 @@ toggleButton()
 // Form validation
 
 function validate(e) {
-  e.preventDefault();
+  e.preventDefault()
+  checkIfInputs(e)
+  
 }
 
 // Form submit event
 form.addEventListener('submit', validate)
 
 // launch modal event
-modalBtn.forEach((btn) => btn.addEventListener('click', launchModal));
+modalBtn.forEach((btn) => btn.addEventListener('click', launchModal))
 
 // launch modal form
 function launchModal() {
-  modalbg.style.display = 'block';
+  modalbg.style.display = 'block'
 }
 
 // Close modal event
-closeBtn.addEventListener('click', closeModal);
+closeBtn.addEventListener('click', closeModal)
 
 // Close modal form
 function closeModal() {
-  modalbg.style.display = 'none';
+  modalbg.style.display = 'none'
 }
 
