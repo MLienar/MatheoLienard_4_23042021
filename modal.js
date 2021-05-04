@@ -23,6 +23,8 @@ function editNav() {
   } else {
     x.className = 'topnav'
   }
+  const navIcon = document.querySelector('.fa-bars')
+  navIcon.style.color === 'white' ? navIcon.style.color = "black" : navIcon.style.color = "white"
 }
 
 // Add warning when input is wrong
@@ -80,7 +82,7 @@ function validateMail(e) {
 
 // Email validation event
 emailInput.addEventListener("change", validateMail)
-let cityInputQuantity = 0
+
 
 // Validate Date
 function validateBirthdate(e) {
@@ -102,6 +104,7 @@ birthdate.addEventListener("change", validateBirthdate)
 
 
 // Validate Quantity
+let cityInputQuantity = 0
 function validateQuantity(e) {
   cityInputQuantity = parseInt(e.target.value)
   if (isNaN(cityInputQuantity)) {
@@ -178,7 +181,6 @@ function validateMandatory(e) {
     formIsValid = false
     toggleButton()
   }
-
 }
 
 // Mandatory checkbox event listener
@@ -189,8 +191,8 @@ function checkIfInputs(e) {
   // Check first 5 inputs
   for (let i = 0; i < 5; i ++) {
     if (e.target[i].value.length < 1) {
-      formIsValid = false;
-      toggleButton();
+      formIsValid = false
+      toggleButton()
       const warning = "Merci de remplir tous les champs"
       addWarning(e, warning)
       return
@@ -199,7 +201,6 @@ function checkIfInputs(e) {
   if (mandatoryCheckBox.checked && formIsValid) {
     removeWarning(e)
     setInterval(()=>{successMessage.style.display = 'flex'}, 1000)
-    
   }
 }
 

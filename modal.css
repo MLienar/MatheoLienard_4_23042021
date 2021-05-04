@@ -35,6 +35,13 @@ img {
   align-items: center;
   justify-content: space-between;
 }
+
+@media screen and (max-width: 700px) {
+  .topnav {
+    margin: 4.5vh 3.5vw 1.5vh;
+  }
+}
+
 .header-logo {
   float: left;
   width: clamp(150px, 15vw, 250px);
@@ -75,7 +82,7 @@ img {
   display: none;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 920px) {
   .topnav a {
     display: none;
   }
@@ -83,9 +90,7 @@ img {
     float: right;
     display: block;
   }
-}
 
-@media screen and (max-width: 900px) {
   .topnav.responsive {
     position: relative;
   }
@@ -93,11 +98,21 @@ img {
     position: absolute;
     right: 0;
     top: 0;
+    z-index: 6;
   }
   .topnav.responsive a {
     float: none;
     display: block;
     text-align: left;
+  }
+  .navbar-links {
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    right: 5px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0 0 0 / 10%);
   }
 }
 
@@ -530,11 +545,14 @@ footer {
     box-shadow: unset;
     max-height: unset;
     height: unset;
+    overflow: visible;
   }
   .hero-content {
     background: #fff;
     color: #000;
-    padding: 0 20px;
+    width: 90vw;
+    padding: 0;
+    min-width: unset;
   }
   .hero-content::after {
     content: unset;
@@ -545,7 +563,7 @@ footer {
   .hero-headline {
     font-size: clamp(30px, 2rem + 4vw, 60px);
     white-space: normal;
-    line-height: 10vh;
+    line-height: 7vh;
   }
   .hero-text {
     width: unset;
@@ -559,7 +577,6 @@ footer {
     background: url("bg_img.jpg");
     background-size: cover;
     background-position: center;
-    margin: 3.5vh 3.5vw;
     border-radius: 20px;
   }
 
