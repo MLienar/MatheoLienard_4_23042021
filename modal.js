@@ -51,12 +51,18 @@ function removeWarning(e) {
 
 // Validate Names
 function validateName(e) {
+  const regExp = /[a-zA-Z]/g
   if(e.target.value.length < 2) {
     formIsValid = false
     toggleButton()
     const warningMessage = "Merci d'entrer 2 caractères ou plus"
     addWarning(e, warningMessage)
-  } else {
+  } else if (!regExp.test(String(e.target.value).toLowerCase())) {
+    formIsValid = false
+    toggleButton()
+    const warningMessage = "Merci d'entrer au moins une lettre"
+    addWarning(e, warningMessage)
+  }else {
     removeWarning(e)
     formIsValid = true
     toggleButton()
