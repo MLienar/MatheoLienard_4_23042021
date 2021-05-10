@@ -27,6 +27,7 @@
       <a href="javascript:void(0);" class="icon" onclick="editNav()">
         <i class="fa fa-bars"></i>
       </a>
+      <div class="menu-closer" onclick="editNav()"></div>
     </div>
     </div>
     <main>
@@ -67,7 +68,7 @@
               </div>
               <div class="formData">
                 <label for="email">E-mail</label><br>
-                <input class="text-control" type="text" id="email" name="email"/><br>
+                <input class="text-control" type="mail" id="email" name="email"/><br>
               </div>
               <div class="formData">
                 <label for="birthdate">Date de naissance</label><br>
@@ -85,7 +86,7 @@
                 <input class="checkbox-input" type="checkbox" id="location2" name="location" value="San Francisco"/>
                 <label class="checkbox-label" for="location2">
                   <span class="checkbox-icon"></span>San Francisco</label>
-                <input class="checkbox-input" type="checkbox" id="location3" name="location" value="Seattle"/>
+                <input class="checkbox-input" type="checkbox" id="location3" name="location" value="Seattle"/>
                 <label class="checkbox-label" for="location3">
                   <span class="checkbox-icon"></span>Seattle</label>
                 <input class="checkbox-input" type="checkbox" id="location4" name="location" value="Chicago"/>
@@ -112,6 +113,7 @@
             </form>
             <div class="succes-message">
               <p>Merci, votre réservation a bien été envoyée !</p>
+              <button class="button modal-close">Fermer</button>
             </div>
           </div>
         </div>

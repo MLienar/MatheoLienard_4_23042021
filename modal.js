@@ -2,7 +2,9 @@
 const modalbg = document.querySelector('.bground')
 const modalBtn = document.querySelectorAll('.modal-btn')
 const formData = document.querySelectorAll('.formData')
+const menuCloser = document.querySelector('.menu-closer')
 const closeBtn = document.querySelector('.close')
+const modalClose = document.querySelector('.modal-close')
 const form = document.querySelector('form')
 const nameInput = document.getElementById('last')
 const firstNameInput = document.getElementById('first')
@@ -20,8 +22,10 @@ function editNav() {
   var x = document.getElementById('myTopnav')
   if (x.className === 'topnav') {
     x.className += ' responsive'
+    menuCloser.style.display = 'block';
   } else {
     x.className = 'topnav'
+    menuCloser.style.display = 'none';
   }
   const navIcon = document.querySelector('.fa-bars')
   navIcon.style.color === 'white' ? navIcon.style.color = "black" : navIcon.style.color = "white"
@@ -220,7 +224,6 @@ toggleButton()
 function validate(e) {
   e.preventDefault()
   checkIfInputs(e)
-  
 }
 
 // Form submit event
@@ -234,11 +237,13 @@ function launchModal() {
   modalbg.style.display = 'block'
 }
 
-// Close modal event
-closeBtn.addEventListener('click', closeModal)
 
 // Close modal form
 function closeModal() {
   modalbg.style.display = 'none'
 }
+
+// Close modal event
+closeBtn.addEventListener('click', closeModal)
+modalClose.addEventListener('click', closeModal)
 
