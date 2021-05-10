@@ -3,6 +3,7 @@ const modalbg = document.querySelector('.bground')
 const modalBtn = document.querySelectorAll('.modal-btn')
 const formData = document.querySelectorAll('.formData')
 const closeBtn = document.querySelector('.close')
+const modalClose = document.querySelector('.modal-close')
 const form = document.querySelector('form')
 const nameInput = document.getElementById('last')
 const firstNameInput = document.getElementById('first')
@@ -234,11 +235,13 @@ function launchModal() {
   modalbg.style.display = 'block'
 }
 
-// Close modal event
-closeBtn.addEventListener('click', closeModal)
 
 // Close modal form
 function closeModal() {
   modalbg.style.display = 'none'
 }
+
+// Close modal event
+closeBtn.addEventListener('click', closeModal)
+modalClose.addEventListener('click', closeModal)
 

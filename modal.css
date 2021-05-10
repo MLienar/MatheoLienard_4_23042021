@@ -417,8 +417,15 @@ input {
   display: none;
   justify-content: center;
   align-items: center;
-  padding: 0 5vw;
+  padding: 4vh 5vw;
   text-align: center;
+  flex-flow: column nowrap;
+}
+
+.modal-close {
+  border: none;
+  position: absolute;
+  bottom: 10vh;
 }
 
 .select-items div,
