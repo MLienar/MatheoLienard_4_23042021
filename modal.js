@@ -71,8 +71,8 @@ nameInput.addEventListener("change", validateName)
 function validateMail(e) {
   const userEmail = e.target.value
   console.log(userEmail)
-  const regExp = new RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
-  if(regExp.test(userEmail)) {
+  const regExp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+  if(regExp.test(String(userEmail).toLowerCase())) {
     formIsValid = true
     toggleButton()
     removeWarning(e)
